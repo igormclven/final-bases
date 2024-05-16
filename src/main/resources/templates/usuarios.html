@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+<h1 class="text-2xl font-bold mb-4">Listado de Usuarios</h1>
+<table class="min-w-full bg-white shadow-md rounded-lg">
+    <thead>
+    <tr>
+        <th class="py-2 px-4 bg-gray-200">ID</th>
+        <th class="py-2 px-4 bg-gray-200">Nombre</th>
+        <th class="py-2 px-4 bg-gray-200">Apellido</th>
+        <th class="py-2 px-4 bg-gray-200">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}" class="border-t">
+        <td class="py-2 px-4" th:text="${usuario.id}">1</td>
+        <td class="py-2 px-4" th:text="${usuario.nombre}">Nombre</td>
+        <td class="py-2 px-4" th:text="${usuario.apellido}">Apellido</td>
+        <td class="py-2 px-4">
+            <a th:href="@{/usuario/read/{id}(id=${usuario.id})}" class="text-blue-500 hover:underline">Ver info</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
