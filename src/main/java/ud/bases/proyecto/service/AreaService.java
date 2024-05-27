@@ -20,7 +20,7 @@ public class AreaService {
         return areaDAO.encontrarTodos();
     }
 
-    public Area encontrarPorId(long id) throws SQLException {
+    public Area encontrarPorId(int id) throws SQLException {
         return areaDAO.encontrarPorId(id);
     }
 
@@ -40,7 +40,7 @@ public class AreaService {
         return areaDAO.filtrarCampoValor(campo, valor);
     }
 
-    public List<Area> filtrarCampoValorId(String campo, long valor) throws SQLException {
+    public List<Area> filtrarCampoValorId(String campo, int valor) throws SQLException {
         return areaDAO.filtrarCampoValorId(campo, valor);
     }
 

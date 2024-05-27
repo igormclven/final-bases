@@ -85,7 +85,7 @@ public class PagoDAO implements IDAO<Pago>{
     }
 
     @Override
-    public Pago encontrarPorId(long id) throws SQLException {
+    public Pago encontrarPorId(int id) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
         Pago pago = new Pago();
@@ -172,7 +172,7 @@ public class PagoDAO implements IDAO<Pago>{
     }
 
     @Override
-    public List<Pago> filtrarCampoValorId (String campo, long valor) throws SQLException {
+    public List<Pago> filtrarCampoValorId (String campo, int valor) throws SQLException {
 
         PreparedStatement st = null;
         ResultSet result = null;

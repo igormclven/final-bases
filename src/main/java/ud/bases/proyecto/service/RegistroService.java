@@ -22,7 +22,7 @@ public class RegistroService {
         return registroDAO.encontrarTodos();
     }
 
-    public Registro encontrarPorId(long id) throws SQLException {
+    public Registro encontrarPorId(int id) throws SQLException {
         return registroDAO.encontrarPorId(id);
     }
 
@@ -42,7 +42,7 @@ public class RegistroService {
         return registroDAO.filtrarCampoValor(campo, valor);
     }
 
-    public List<Registro> filtrarCampoValorId(String campo, long valor) throws SQLException {
+    public List<Registro> filtrarCampoValorId(String campo, int valor) throws SQLException {
         return registroDAO.filtrarCampoValorId(campo, valor);
     }
 

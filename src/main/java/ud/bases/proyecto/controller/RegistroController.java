@@ -23,7 +23,7 @@ public class RegistroController {
     }
 
     @GetMapping("/listar/{id}")
-    public Registro encontrarPorId(@PathVariable long id) throws SQLException {
+    public Registro encontrarPorId(@PathVariable int id) throws SQLException {
         return registroService.encontrarPorId(id);
     }
 

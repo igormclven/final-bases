@@ -23,7 +23,7 @@ public class PagoController {
     }
 
     @GetMapping("/listar/{id}")
-    public Pago encontrarPorId(@PathVariable long id) throws SQLException {
+    public Pago encontrarPorId(@PathVariable int id) throws SQLException {
         return pagoService.encontrarPorId(id);
     }
 

@@ -26,7 +26,7 @@ public class EspacioController {
     }
 
     @GetMapping("/listar/{id}")
-    public Espacio encontrarPorId(@PathVariable long id) throws SQLException {
+    public Espacio encontrarPorId(@PathVariable int id) throws SQLException {
         return espacioService.encontrarPorId(id);
     }
 
@@ -66,7 +66,7 @@ public class EspacioController {
     }
 
     @GetMapping("/filtrarId/{campo}/{valor}")
-    public List<Espacio> filtrarCampoValorId(@PathVariable String campo, @PathVariable long valor) throws SQLException {
+    public List<Espacio> filtrarCampoValorId(@PathVariable String campo, @PathVariable int valor) throws SQLException {
         return espacioService.filtrarCampoValorId(campo, valor);
     }
 

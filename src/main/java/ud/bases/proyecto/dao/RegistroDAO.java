@@ -79,7 +79,7 @@ public class RegistroDAO implements IDAO<Registro> {
     }
 
     @Override
-    public Registro encontrarPorId(long id) throws SQLException {
+    public Registro encontrarPorId(int id) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
         Registro Registro = new Registro();
@@ -169,7 +169,7 @@ public class RegistroDAO implements IDAO<Registro> {
     }
 
     @Override
-    public List<Registro> filtrarCampoValorId (String campo, long valor) throws SQLException {
+    public List<Registro> filtrarCampoValorId (String campo, int valor) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
         List<Registro> registros = new ArrayList<>();

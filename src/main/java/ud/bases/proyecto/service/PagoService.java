@@ -20,7 +20,7 @@ public class PagoService {
         return pagoDAO.encontrarTodos();
     }
 
-    public Pago encontrarPorId(long id) throws SQLException {
+    public Pago encontrarPorId(int id) throws SQLException {
         return pagoDAO.encontrarPorId(id);
     }
 
@@ -40,7 +40,7 @@ public class PagoService {
         return pagoDAO.filtrarCampoValor(campo, valor);
     }
 
-    public List<Pago> filtrarCampoValorId(String campo, long valor) throws SQLException {
+    public List<Pago> filtrarCampoValorId(String campo, int valor) throws SQLException {
         return pagoDAO.filtrarCampoValorId(campo, valor);
     }
 

@@ -20,7 +20,7 @@ public class EspacioService {
         return espacioDAO.encontrarTodos();
     }
 
-    public Espacio encontrarPorId(long id) throws SQLException {
+    public Espacio encontrarPorId(int id) throws SQLException {
         return espacioDAO.encontrarPorId(id);
     }
 
@@ -44,7 +44,7 @@ public class EspacioService {
         return espacioDAO.filtrarCampoValor(campo, valor);
     }
 
-    public List<Espacio> filtrarCampoValorId(String campo, long valor) throws SQLException {
+    public List<Espacio> filtrarCampoValorId(String campo, int valor) throws SQLException {
         return espacioDAO.filtrarCampoValorId(campo, valor);
     }
 

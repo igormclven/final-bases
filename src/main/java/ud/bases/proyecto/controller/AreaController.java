@@ -1,6 +1,7 @@
 package ud.bases.proyecto.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ud.bases.proyecto.entity.Area;
@@ -25,7 +26,7 @@ public class AreaController {
     }
 
     @GetMapping("/todas/{id}")
-    public List<Area> encontrarPorId(long id) throws SQLException {
+    public List<Area> encontrarPorId(@PathVariable int id) throws SQLException {
         return areaService.filtrarCampoValorId("k_idParqueadero",id);
     }
 }

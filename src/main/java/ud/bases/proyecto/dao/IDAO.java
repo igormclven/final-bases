@@ -11,12 +11,12 @@ public interface IDAO<T> {
 
     public void eliminar(T t) throws SQLException;
 
-    public T encontrarPorId(long id) throws SQLException;
+    public T encontrarPorId(int id) throws SQLException;
 
     public List<T> encontrarTodos() throws SQLException;
 
     public List<T> filtrarCampoValor(String campo, String valor) throws SQLException;
 
-    public List<T> filtrarCampoValorId(String campo, long valor) throws SQLException;
+    public List<T> filtrarCampoValorId(String campo, int valor) throws SQLException;
 
 }

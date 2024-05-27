@@ -86,8 +86,33 @@ public class AreaDAO implements IDAO<Area> {
     }
 
     @Override
-    public Area encontrarPorId(long id) throws SQLException {
-        return null;
+    public Area encontrarPorId(int id) throws SQLException {
+        PreparedStatement st = null;
+        ResultSet result = null;
+        Area area = new Area();
+
+        try {
+            connection.open();
+            st = connection.conn.prepareStatement("SELECT * FROM area WHERE \"k_idArea\" = ?;");
+            st.setInt(1, id);
+            result = st.executeQuery();
+
+            while (result.next()) {
+                area.setId(result.getInt("k_idArea"));
+                area.setNombre(result.getString("n_nombre"));
+                area.setDescripcion(result.getString("n_descripcion"));
+                area.setCapacidadTotal(result.getInt("q_capacidadTotal"));
+                area.setCapacidadDisponible(result.getInt("q_capacidadDisponible"));
+                area.setIdParqueadero(result.getInt("k_idParqueadero"));
+            }
+        } catch (Exception e) {
+            LOGGER.severe("Error al encontrar area por id: " + e.getMessage());
+            throw e;
+        } finally {
+            st.close();
+            connection.close();
+        }
+        return area;
     }
 
     @Override
@@ -153,15 +178,16 @@ public class AreaDAO implements IDAO<Area> {
     }
 
     @Override
-    public List<Area> filtrarCampoValorId (String campo, long valor) throws SQLException {
+    public List<Area> filtrarCampoValorId (String campo, int valor) throws SQLException {
         Statement st = null;
         ResultSet result = null;
         List<Area> areas = new ArrayList<>();
 
+        int val = (int) valor;
         try {
             connection.open();
             st = connection.conn.createStatement();
-            result = st.executeQuery("SELECT * FROM area WHERE " + campo + " = " + valor + ";");
+            result = st.executeQuery("SELECT * FROM area WHERE " + "\"" + campo + "\""+ " = " + val + ";");
 
             while (result.next()) {
                 Area area = new Area();

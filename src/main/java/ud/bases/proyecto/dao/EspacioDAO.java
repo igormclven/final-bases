@@ -78,7 +78,7 @@ public class EspacioDAO implements IDAO<Espacio> {
     }
 
     @Override
-    public Espacio encontrarPorId(long id) throws SQLException {
+    public Espacio encontrarPorId(int id) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
         Espacio espacio = new Espacio();
@@ -159,13 +159,13 @@ public class EspacioDAO implements IDAO<Espacio> {
     }
 
     @Override
-    public List<Espacio> filtrarCampoValorId(String campo, long valor) throws SQLException {
+    public List<Espacio> filtrarCampoValorId(String campo, int valor) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
         List<Espacio> espacios = new ArrayList<>();
         try {
             connection.open();
-            st = connection.conn.prepareStatement("SELECT * FROM espacio WHERE " + "\""+ campo + "\"" + " = ?;");
+            st = connection.conn.prepareStatement("SELECT * FROM espacio WHERE " + "\""+ campo + "\"" + " = ? ORDER BY" + "\""+"k_idEspacio"+"\"" + "ASC;");
             st.setLong(1, valor);
             result = st.executeQuery();
             while (result.next()) {
