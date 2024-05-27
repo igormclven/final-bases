@@ -47,10 +47,18 @@ public class EspacioController {
         espacioService.eliminar(espacio);
     }
 
-    @PutMapping("/actualizarEstado/{id}/{estado}")
-    public void actualizarEstado(@PathVariable long id, @PathVariable String estado) throws SQLException {
+    @PutMapping("/cambioDisponible/{id}")
+    public void cambioDisponibile(@PathVariable long id) throws SQLException {
+        String estado = "disponible";
         espacioService.actualizarEstado(id, estado);
     }
+
+    @PutMapping("/cambioOcupado/{id}")
+    public void cambioOcupado(@PathVariable long id) throws SQLException {
+        String estado = "ocupado";
+        espacioService.actualizarEstado(id, estado);
+    }
+
 
     @GetMapping("/filtrar/{campo}/{valor}")
     public List<Espacio> filtrarCampoValor(@PathVariable String campo, @PathVariable String valor) throws SQLException {

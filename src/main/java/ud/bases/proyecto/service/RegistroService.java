@@ -6,6 +6,7 @@ import ud.bases.proyecto.entity.Espacio;
 import ud.bases.proyecto.entity.Registro;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -51,5 +52,13 @@ public class RegistroService {
 
     public int contarRegistros() throws SQLException {
         return registroDAO.contarRegistros();
+    }
+
+    public void actualizarFechaSalida(int registro) throws SQLException {
+
+        java.util.Date fecha = new java.util.Date();
+        Timestamp timestamp = new Timestamp(fecha.getTime());
+
+        registroDAO.actualizarFechaSalida(registro, timestamp);
     }
 }

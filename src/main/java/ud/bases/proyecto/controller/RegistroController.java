@@ -63,4 +63,10 @@ public class RegistroController {
     public int contarRegistros() throws SQLException {
         return registroService.contarRegistros();
     }
+
+    @PutMapping("/salida/{id}")
+    public void actualizarFechaSalida(@PathVariable int id) throws SQLException {
+        registroService.actualizarFechaSalida(id);
+    }
+
 }

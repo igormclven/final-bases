@@ -4,10 +4,7 @@ import org.springframework.stereotype.Repository;
 import ud.bases.proyecto.entity.Registro;
 import ud.bases.proyecto.repository.Connection;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,12 +15,6 @@ public class RegistroDAO implements IDAO<Registro> {
     private static final Logger LOGGER = Logger.getLogger(RegistroDAO.class.getName());
 
     private Connection connection = new Connection();
-
-    private final EspacioDAO espacioDAO;
-
-    public RegistroDAO(EspacioDAO espacioDAO) {
-        this.espacioDAO = espacioDAO;
-    }
 
     @Override
     public void insertar(Registro registro) throws SQLException {
@@ -41,7 +32,7 @@ public class RegistroDAO implements IDAO<Registro> {
             st.setString(4, registro.getTipoVehiculo());
             st.setLong(5, registro.getIdEspacio());
             st.executeUpdate();
-            
+
         } catch (Exception e) {
             LOGGER.severe("Error al insertar registro: " + e.getMessage());
             throw e;
@@ -255,4 +246,20 @@ public class RegistroDAO implements IDAO<Registro> {
         }
         return registros;
     }
+
+    public void actualizarFechaSalida(int registro, Timestamp fecha) throws SQLException {
+        PreparedStatement st = null;
+        try {
+            connection.open();
+            st = connection.conn.prepareStatement("UPDATE registro SET \"f_fechaSalida\" = ? WHERE \"k_idRegistro\" = ?;");
+            st.setTimestamp(1, fecha);
+            st.setInt(2, registro);
+            st.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.severe("Error al actualizar fecha de salida: " + e.getMessage());
+            throw e;
+        } finally {
+            st.close();
+        }
+        }
 }
