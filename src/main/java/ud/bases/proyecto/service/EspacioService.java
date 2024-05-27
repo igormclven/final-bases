@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class EspacioServico {
+public class EspacioService {
 
     private final EspacioDAO espacioDAO;
 
-    public EspacioServico(EspacioDAO espacioDAO) {
+    public EspacioService(EspacioDAO espacioDAO) {
         this.espacioDAO = espacioDAO;
     }
 

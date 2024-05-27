@@ -38,7 +38,6 @@ public class EspacioDAO implements IDAO<Espacio> {
             throw e;
         } finally {
             st.close();
-            connection.close();
         }
     }
 
@@ -58,7 +57,6 @@ public class EspacioDAO implements IDAO<Espacio> {
             throw e;
         } finally {
             st.close();
-            connection.close();
         }
     }
 
@@ -101,7 +99,6 @@ public class EspacioDAO implements IDAO<Espacio> {
         } finally {
             result.close();
             st.close();
-            connection.close();
         }
         return espacio;
     }
@@ -129,7 +126,6 @@ public class EspacioDAO implements IDAO<Espacio> {
         } finally {
             result.close();
             st.close();
-            connection.close();
         }
         return espacios;
     }
@@ -158,7 +154,6 @@ public class EspacioDAO implements IDAO<Espacio> {
         } finally {
             result.close();
             st.close();
-            connection.close();
         }
         return espacios;
     }
@@ -187,7 +182,6 @@ public class EspacioDAO implements IDAO<Espacio> {
         } finally {
             result.close();
             st.close();
-            connection.close();
         }
         return espacios;
     }
@@ -206,7 +200,6 @@ public class EspacioDAO implements IDAO<Espacio> {
             throw e;
         } finally {
             st.close();
-            connection.close();
         }
     }
 
@@ -233,7 +226,6 @@ public class EspacioDAO implements IDAO<Espacio> {
         } finally {
             result.close();
             st.close();
-            connection.close();
         }
         return espacios;
     }
