@@ -19,4 +19,16 @@ public class EstadisticaService {
     public List<Estadistica> estadisticaDia() throws SQLException {
         return estadisticaDAO.estadisticaDia();
     }
+
+    public List<Estadistica> estadisticaMes() throws SQLException {
+        return estadisticaDAO.estadisticaMes();
+    }
+
+    public List<Estadistica> estadisticaSemana() throws SQLException {
+        return estadisticaDAO.estadisticaSemana();
+    }
+
+    public List<Estadistica> estadisticaAno() throws SQLException {
+        return estadisticaDAO.estadisticaAno();
+    }
 }

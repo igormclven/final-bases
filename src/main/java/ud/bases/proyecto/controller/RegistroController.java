@@ -74,4 +74,8 @@ public class RegistroController {
         return registroService.encontrarRegistrosPorPlaca(placa);
     }
 
+    @GetMapping("/activos")
+    public List<Registro> registrosActivos() throws SQLException {
+        return registroService.registrosActivos();
+    }
 }

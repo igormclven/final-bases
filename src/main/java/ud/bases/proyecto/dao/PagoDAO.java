@@ -23,6 +23,8 @@ public class PagoDAO implements IDAO<Pago>{
     public void insertar(Pago pago) throws SQLException {
         LOGGER.info("Insertando pago: " + pago.getId());
 
+        LOGGER.info("Insertando pago: " + pago.getFechaPago());
+
         PreparedStatement st = null;
 
         try {
@@ -33,7 +35,7 @@ public class PagoDAO implements IDAO<Pago>{
             st.setInt(1, pago.getId());
             st.setString(2, pago.getFormaPago());
             st.setDouble(3, pago.getValorPagado());
-            st.setDate(4, pago.getFechaPago());
+            st.setTimestamp(4, pago.getFechaPago());
             st.setInt(5, pago.getIdRegistro());
             st.executeUpdate();
 
@@ -54,7 +56,7 @@ public class PagoDAO implements IDAO<Pago>{
             st = connection.conn.prepareStatement("UPDATE pago SET \"n_formaPago\" = ?, \"v_valorPagado\" = ?, \"f_fechaPago\" = ?, \"k_idRegistro\" = ? WHERE \"k_idPago\" = ?;");
             st.setString(1, pago.getFormaPago());
             st.setDouble(2, pago.getValorPagado());
-            st.setDate(3, pago.getFechaPago());
+            st.setTimestamp(3, pago.getFechaPago());
             st.setInt(4, pago.getIdRegistro());
             st.setInt(5, pago.getId());
             st.executeUpdate();
@@ -99,7 +101,7 @@ public class PagoDAO implements IDAO<Pago>{
                 pago.setId(result.getInt("k_idPago"));
                 pago.setFormaPago(result.getString("n_formaPago"));
                 pago.setValorPagado(result.getDouble("v_valorPagado"));
-                pago.setFechaPago(result.getDate("f_fechaPago"));
+                pago.setFechaPago(result.getTimestamp("f_fechaPago"));
                 pago.setIdRegistro(result.getInt("k_idRegistro"));
             }
         } catch (Exception e) {
@@ -125,7 +127,7 @@ public class PagoDAO implements IDAO<Pago>{
                 pago.setId(result.getInt("k_idPago"));
                 pago.setFormaPago(result.getString("n_formaPago"));
                 pago.setValorPagado(result.getDouble("v_valorPagado"));
-                pago.setFechaPago(result.getDate("f_fechaPago"));
+                pago.setFechaPago(result.getTimestamp("f_fechaPago"));
                 pago.setIdRegistro(result.getInt("k_idRegistro"));
                 pagos.add(pago);
             }
@@ -157,7 +159,7 @@ public class PagoDAO implements IDAO<Pago>{
                 pago.setId(result.getInt("k_idPago"));
                 pago.setFormaPago(result.getString("n_formaPago"));
                 pago.setValorPagado(result.getDouble("v_valorPagado"));
-                pago.setFechaPago(result.getDate("f_fechaPago"));
+                pago.setFechaPago(result.getTimestamp("f_fechaPago"));
                 pago.setIdRegistro(result.getInt("k_idRegistro"));
                 pagos.add(pago);
             }
@@ -189,7 +191,7 @@ public class PagoDAO implements IDAO<Pago>{
                 pago.setId(result.getInt("k_idPago"));
                 pago.setFormaPago(result.getString("n_formaPago"));
                 pago.setValorPagado(result.getDouble("v_valorPagado"));
-                pago.setFechaPago(result.getDate("f_fechaPago"));
+                pago.setFechaPago(result.getTimestamp("f_fechaPago"));
                 pago.setIdRegistro(result.getInt("k_idRegistro"));
                 pagos.add(pago);
             }
@@ -224,17 +226,17 @@ public class PagoDAO implements IDAO<Pago>{
         return registros;
     }
 
-    public float calcularTarifa(int id) throws SQLException {
+    public long calcularTarifa(int id) throws SQLException {
         PreparedStatement st = null;
         ResultSet result = null;
-        float tarifa = 0;
+        long tarifa = 0;
         try {
             connection.open();
-            st = connection.conn.prepareStatement("SELECT ROUND((EXTRACT(EPOCH FROM (r.\"f_fechaSalida\" - r.\"f_fechaEntrada\")) / 60) * t.\"v_valor\",2) AS tarifa FROM registro r inner join tarifa t on r.\"n_tipoVehiculo\" = t.\"n_tipoVehiculo\" WHERE r.\"k_idRegistro\" = ?;");
+            st = connection.conn.prepareStatement("SELECT FLOOR((EXTRACT(EPOCH FROM (reg.\"f_fechaSalida\" - reg.\"f_fechaEntrada\")) / 60) * tar.\"v_valor\") AS tarifa FROM registro AS reg JOIN (SELECT tarifa.* FROM parqueadero_tarifa AS pt JOIN tarifa ON pt.\"k_idTarifa\" = tarifa.\"k_idTarifa\") AS tar ON reg.\"n_tipoVehiculo\" = tar.\"n_tipoVehiculo\" WHERE reg.\"k_idRegistro\" = ?;");
             st.setInt(1, id);
             result = st.executeQuery();
             if (result.next()) {
-                tarifa = result.getFloat("tarifa");
+                tarifa = result.getLong("tarifa");
             }
         } catch (Exception e) {
             LOGGER.severe("Error al calcular tarifa: " + e.getMessage());

@@ -291,4 +291,32 @@ public class RegistroDAO implements IDAO<Registro> {
         }
         return registros;
     }
+
+    public List<Registro> registrosActivos () throws SQLException {
+        Statement st = null;
+        ResultSet result = null;
+        List<Registro> registros = new ArrayList<>();
+        try {
+            connection.open();
+            st = connection.conn.createStatement();
+            result = st.executeQuery("SELECT * FROM registro WHERE \"f_fechaSalida\" is null;");
+            while (result.next()) {
+                Registro registro = new Registro();
+                registro.setId(result.getInt("k_idRegistro"));
+                registro.setPlaca(result.getString("n_placa"));
+                registro.setFechaEntrada(result.getTimestamp("f_fechaEntrada"));
+                registro.setFechaSalida(result.getTimestamp("f_fechaSalida"));
+                registro.setTipoVehiculo(result.getString("n_tipoVehiculo"));
+                registro.setIdEspacio(result.getInt("k_idEspacio"));
+                registros.add(registro);
+            }
+        } catch (Exception e) {
+            LOGGER.severe("Error al encontrar registros activos: " + e.getMessage());
+            throw e;
+        } finally {
+            result.close();
+            st.close();
+        }
+        return registros;
+    }
 }

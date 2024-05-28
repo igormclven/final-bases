@@ -23,4 +23,19 @@ public class EstadisticaController {
     public List<Estadistica> estadisticaDia() throws SQLException {
         return estadisticaService.estadisticaDia();
     }
+
+    @GetMapping("/semana")
+    public List<Estadistica> estadisticaSemana() throws SQLException {
+        return estadisticaService.estadisticaSemana();
+    }
+
+    @GetMapping("/mes")
+    public List<Estadistica> estadisticaMes() throws SQLException {
+        return estadisticaService.estadisticaMes();
+    }
+
+    @GetMapping("/ano")
+    public List<Estadistica> estadisticaAno() throws SQLException {
+        return estadisticaService.estadisticaAno();
+    }
 }

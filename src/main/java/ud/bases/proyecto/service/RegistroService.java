@@ -65,4 +65,8 @@ public class RegistroService {
     public List<Registro> encontrarRegistrosPorPlaca(String placa) throws SQLException {
         return registroDAO.registroPorPlaca(placa);
     }
+
+    public List<Registro> registrosActivos() throws SQLException {
+        return registroDAO.registrosActivos();
+    }
 }

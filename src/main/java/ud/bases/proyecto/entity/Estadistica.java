@@ -13,6 +13,6 @@ import java.sql.Date;
 @Setter
 public class Estadistica {
 
-    private Date fecha;
+    private String agrupacion;
     private long cantidad;
 }

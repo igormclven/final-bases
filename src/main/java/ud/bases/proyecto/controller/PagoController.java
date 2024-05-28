@@ -55,7 +55,7 @@ public class PagoController {
     }
 
     @GetMapping("/calcularTarifa/{id}")
-    public float calcularTarifa(@PathVariable int id) throws SQLException {
+    public long calcularTarifa(@PathVariable int id) throws SQLException {
         return pagoService.calcularTarifa(id);
     }
 

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +16,6 @@ public class Pago {
     private int id;
     private String formaPago;
     private double valorPagado;
-    private Date fechaPago;
+    private Timestamp fechaPago;
     private int idRegistro;
 }

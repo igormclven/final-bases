@@ -49,7 +49,7 @@ public class PagoService {
         return pagoDAO.contarPagos();
     }
 
-    public float calcularTarifa(int id) throws SQLException {
+    public long calcularTarifa(int id) throws SQLException {
         return pagoDAO.calcularTarifa(id);
     }
 
