@@ -61,3 +61,40 @@ CHECK (
     "f_fechaPago" <= CURRENT_TIMESTAMP
 );
 ```
+
+Calcular Tarifa
+```sql
+-- Todos los registros
+select * from registro;
+
+-- Diferencia de fechas en minutos
+SELECT EXTRACT(EPOCH FROM ("f_fechaSalida" - "f_fechaEntrada")) / 60 AS minutos
+FROM registro;
+
+-- Tarifas aplicadas al parqueadero
+SELECT tarifa.*
+FROM parqueadero_tarifa AS pt
+JOIN tarifa ON pt."k_idTarifa" = tarifa."k_idTarifa"
+WHERE pt."k_idParqueadero" = 1;
+
+-- Combinación para calcular la tarifa
+SELECT (EXTRACT(EPOCH FROM (reg."f_fechaSalida" - reg."f_fechaEntrada")) / 60) * tar."v_valor" AS total_costo
+FROM registro AS reg
+JOIN (
+	SELECT tarifa.*
+	FROM parqueadero_tarifa AS pt
+	JOIN tarifa ON pt."k_idTarifa" = tarifa."k_idTarifa"
+	) AS tar ON reg."n_tipoVehiculo" = tar."n_tipoVehiculo"
+WHERE reg."k_idRegistro" = 1;
+
+-- Redondear a enteros
+SELECT FLOOR((EXTRACT(EPOCH FROM (reg."f_fechaSalida" - reg."f_fechaEntrada")) / 60) * tar."v_valor") AS total_costo
+FROM registro AS reg
+JOIN (
+	SELECT tarifa.*
+	FROM parqueadero_tarifa AS pt
+	JOIN tarifa ON pt."k_idTarifa" = tarifa."k_idTarifa"
+	) AS tar ON reg."n_tipoVehiculo" = tar."n_tipoVehiculo"
+WHERE reg."k_idRegistro" = 51;
+
+```
