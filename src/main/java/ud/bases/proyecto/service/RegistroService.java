@@ -61,4 +61,8 @@ public class RegistroService {
 
         registroDAO.actualizarFechaSalida(registro, timestamp);
     }
+
+    public List<Registro> encontrarRegistrosPorPlaca(String placa) throws SQLException {
+        return registroDAO.registroPorPlaca(placa);
+    }
 }

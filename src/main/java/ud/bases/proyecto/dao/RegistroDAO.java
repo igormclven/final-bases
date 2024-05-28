@@ -261,5 +261,34 @@ public class RegistroDAO implements IDAO<Registro> {
         } finally {
             st.close();
         }
+    }
+
+    public List<Registro> registroPorPlaca(String placa) throws SQLException {
+        PreparedStatement st = null;
+        ResultSet result = null;
+        List<Registro> registros = new ArrayList<>();
+        try {
+            connection.open();
+            st = connection.conn.prepareStatement("SELECT * FROM registro WHERE \"n_placa\" = ?;");
+            st.setString(1, placa);
+            result = st.executeQuery();
+            while (result.next()) {
+                Registro registro = new Registro();
+                registro.setId(result.getInt("k_idRegistro"));
+                registro.setPlaca(result.getString("n_placa"));
+                registro.setFechaEntrada(result.getTimestamp("f_fechaEntrada"));
+                registro.setFechaSalida(result.getTimestamp("f_fechaSalida"));
+                registro.setTipoVehiculo(result.getString("n_tipoVehiculo"));
+                registro.setIdEspacio(result.getInt("k_idEspacio"));
+                registros.add(registro);
+            }
+        } catch (Exception e) {
+            LOGGER.severe("Error al encontrar registro por placa: " + e.getMessage());
+            throw e;
+        } finally {
+            result.close();
+            st.close();
         }
+        return registros;
+    }
 }

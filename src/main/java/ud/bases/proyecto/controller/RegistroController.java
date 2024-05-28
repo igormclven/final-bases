@@ -69,4 +69,9 @@ public class RegistroController {
         registroService.actualizarFechaSalida(id);
     }
 
+    @GetMapping("/placa/{placa}")
+    public List<Registro> encontrarRegistrosPorPlaca(@PathVariable String placa) throws SQLException {
+        return registroService.encontrarRegistrosPorPlaca(placa);
+    }
+
 }
