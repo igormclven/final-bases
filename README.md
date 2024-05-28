@@ -3,6 +3,8 @@
 Usando SpringBoot - Postgres y Thymeleaf (Tailwind). 
 
 
+Consultas varias
+
 ```sql
 select * from espacio where espacio."n_Estado" = 'disponible';
 
@@ -41,4 +43,21 @@ select *  from espacio  where "k_idArea" = 1  order by "k_idEspacio" asc;
 select * from parqueadero;
 
 select * from tarifa;
+```
+
+
+Consultas varias
+```sql
+select * from pago
+
+select * from registro where  "f_fechaSalida" is null
+
+
+
+ALTER TABLE pago
+ADD CONSTRAINT "CK_fechaPago"
+CHECK (
+    "f_fechaPago" >= '2021-01-01 00:00:00'::timestamp AND 
+    "f_fechaPago" <= CURRENT_TIMESTAMP
+);
 ```
